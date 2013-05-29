@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @book.name
+%p
+  %b Cover url:
+  = @book.cover_url
+%p
+  %b Notes:
+  = @book.notes
+%p
+  %b Genre:
+  = @book.genre
+%p
+  %b User:
+  = @book.user_id
+
+= link_to 'Edit', edit_book_path(@book)
+\|
+= link_to 'Back', books_path

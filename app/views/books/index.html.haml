@@ -1,0 +1,27 @@
+%h1 Listing books
+
+%table
+  %tr
+    %th Name
+    %th Cover url
+    %th Notes
+    %th Genre
+    %th User
+    %th
+    %th
+    %th
+
+  - @books.each do |book|
+    %tr
+      %td= book.name
+      %td= book.cover_url
+      %td= book.notes
+      %td= book.genre
+      %td= book.user_id
+      %td= link_to 'Show', book
+      %td= link_to 'Edit', edit_book_path(book)
+      %td= link_to 'Destroy', book, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Book', new_book_path

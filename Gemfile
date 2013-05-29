@@ -9,6 +9,7 @@ gem 'jquery-rails'
 gem "thin", ">= 1.5.0"
 gem "pg", ">= 0.15.0"
 gem "haml-rails", ">= 0.4"
+gem 'inherited_resources', ">= 1.3.0"
 gem "html2haml", ">= 1.0.1", :group => :development
 gem "rspec-rails", ">= 2.12.2", :group => [:development, :test]
 gem "database_cleaner", ">= 1.0.0.RC1", :group => :test
