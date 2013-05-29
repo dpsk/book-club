@@ -2,9 +2,9 @@
 %ul.nav
   - if user_signed_in?
     %li
-      Logged in as #{current_user.name}
+      = link_to "Logged in as #{current_user}", "#"
     %li
-      = link_to 'Logout', session_path, method: :delete
+      = link_to 'Logout', signout_path, method: :delete
   - else
     %li
-      = link_to 'Login', new_session_path
+      = link_to 'Login', "/auth/google_oauth2"

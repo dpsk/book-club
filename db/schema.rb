@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130529083425) do
+ActiveRecord::Schema.define(:version => 20130529112919) do
 
   create_table "books", :force => true do |t|
     t.string   "name"
@@ -19,8 +19,11 @@ ActiveRecord::Schema.define(:version => 20130529083425) do
     t.text     "notes"
     t.string   "genre"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.string   "author"
+    t.integer  "reputation", :default => 0
+    t.boolean  "featured",   :default => false
   end
 
   add_index "books", ["user_id"], :name => "index_books_on_user_id"
@@ -33,5 +36,15 @@ ActiveRecord::Schema.define(:version => 20130529083425) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "votes", :force => true do |t|
+    t.integer  "book_id"
+    t.integer  "user_id"
+    t.integer  "score"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "votes", ["book_id"], :name => "index_votes_on_book_id"
 
 end

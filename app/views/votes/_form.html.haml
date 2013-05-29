@@ -1,0 +1,11 @@
+= simple_form_for([@book, @vote]) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :book_id, as: :hidden, input_html: {value: @book.id}
+    = text_field_tag :book_name, @book.name, readonly: :readonly
+    = f.input :user_id, as: :hidden, input_html: {value: current_user.id}
+    = f.input :score, as: :select, collection: Vote::SCORES
+
+  .form-actions
+    = f.button :submit
