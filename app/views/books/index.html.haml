@@ -1,41 +1,50 @@
-%h1 All books
+.row{style: "text-align: center;"}
+  %h2
+    Book of the day is
+    %em
+      #{@book_of_the_day.name}
+    by
+    %em
+      #{@book_of_the_day.author}:
+  = image_tag @book_of_the_day.cover_url, class: "img-rounded", style: "width: 180px;height:300px;"
 
-%table.table
-  %thead
-    %tr
-      - if @user
-        %th Vote
-      %th Name
-      %th Author
-      %th Cover url
-      %th Reputation
-      %th Genre
-      %th Added by
-      %th
-      %th
-      %th
+.row
+  %h3 All books
 
-  - @books.each do |book|
-    %tr
-      - if @user
-        %td
-          - if book.voted_by(current_user)
-            = link_to "<span class='icon-thumbs-up'></span>".html_safe, [:edit, book, book.vote_by(@user)]
-            = link_to "<span class='icon-thumbs-down'></span>".html_safe, [:edit, book, book.vote_by(@user)]
-          - else
-            = link_to "<span class='icon-thumbs-up'></span>".html_safe, [:new, book, :vote]
-            = link_to "<span class='icon-thumbs-down'></span>".html_safe, [:new, book, :vote]
-      %td= book.name
-      %td= book.author
-      %td= image_tag book.cover_url, class: "img-rounded", style: "width: 75px;height:125px;"
-      %td= book.reputation
-      %td= book.genre
-      %td= book.user.to_s
-      %td= link_to 'Show', book
-      %td= link_to 'Edit', edit_book_path(book)
-      - if book.added_by(@user)
-        %td= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' }
+  %table.table
+    %thead
+      %tr
+        - if @user
+          %th Vote
+        %th Name
+        %th Author
+        %th Cover url
+        %th Reputation
+        %th Genre
+        %th Added by
+        %th
+        %th
 
-%br
+    - @books.each do |book|
+      %tr
+        - if @user
+          %td
+            - if book.voted_by(current_user)
+              = link_to "<span class='icon-thumbs-up'></span>".html_safe, [:edit, book, book.vote_by(@user)]
+              = link_to "<span class='icon-thumbs-down'></span>".html_safe, [:edit, book, book.vote_by(@user)]
+            - else
+              = link_to "<span class='icon-thumbs-up'></span>".html_safe, [:new, book, :vote]
+              = link_to "<span class='icon-thumbs-down'></span>".html_safe, [:new, book, :vote]
+        %td= book.name
+        %td= book.author
+        %td= image_tag book.cover_url, class: "img-rounded", style: "width: 75px;height:125px;"
+        %td= book.reputation
+        %td= book.genre
+        %td= book.user.to_s
+        %td= link_to 'Edit', edit_book_path(book)
+        - if book.added_by(@user)
+          %td= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' }
 
-= link_to 'Add Book', new_book_path
+  %br
+
+  = link_to 'Add Book', new_book_path
