@@ -4,7 +4,7 @@
     %li
       Logged in as #{current_user.name}
     %li
-      = link_to 'Logout', signout_path
+      = link_to 'Logout', session_path, method: :delete
   - else
     %li
-      = link_to 'Login', "/auth/google"
+      = link_to 'Login', new_session_path
