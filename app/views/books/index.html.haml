@@ -42,7 +42,7 @@
           %td= image_tag book.cover_url, class: "img-rounded", style: "width: 75px;height:125px;"
           %td= book.reputation
           %td= book.genre
-          %td= book.notes.present? ? link_to("Show", "#", rel: "popover", data: { :"original-title" => book.name, placement: "top", content: book.notes }) : ""
+          %td= book.notes.present? ? link_to("Show", "#", rel: "popover", data: { :"original-title" => book.name, placement: "bottom", content: book.notes }) : ""
           %td= book.user.to_s
           - if book.added_by(@user)
             %td= link_to 'Edit', edit_book_path(book)
