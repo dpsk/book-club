@@ -11,6 +11,10 @@ class Book < ActiveRecord::Base
 
   after_save :one_featured_book
 
+  def self.book_of_the_month
+    where(featured: true).first
+  end
+
   def one_featured_book
     if featured
       featured_books = Book.where(featured: true).reject{|b| b == self}
@@ -21,10 +25,6 @@ class Book < ActiveRecord::Base
   def set_as_featured!
     assign_attributes(featured: true)
     self.save
-  end
-
-  def self.book_of_the_day
-    where(featured: true).first
   end
 
   def added_by user

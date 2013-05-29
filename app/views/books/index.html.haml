@@ -1,12 +1,13 @@
-.row{style: "text-align: center;"}
-  %h2
-    Book of the day is
-    %em
-      #{@book_of_the_day.name}
-    by
-    %em
-      #{@book_of_the_day.author}:
-  = image_tag @book_of_the_day.cover_url, class: "img-rounded", style: "width: 180px;height:300px;"
+- if @book_of_the_month
+  .row{style: "text-align: center;"}
+    %h2
+      Book of the month is
+      %em
+        #{@book_of_the_month.name}
+      by
+      %em
+        #{@book_of_the_month.author}:
+    = image_tag @book_of_the_month.cover_url, class: "img-rounded", style: "width: 180px;height:300px;"
 
 .row
   %h3 All books

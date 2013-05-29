@@ -5,7 +5,7 @@ class BooksController < ApplicationController
   def index
     @user = current_user
     @books = Book.order("reputation DESC")
-    @book_of_the_day = Book.book_of_the_day
+    @book_of_the_month = Book.book_of_the_month
   end
 
   def update
