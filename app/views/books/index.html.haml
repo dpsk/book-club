@@ -22,6 +22,7 @@
           %th Cover url
           %th Reputation
           %th Genre
+          %th Notes
           %th Added by
           %th
           %th
@@ -41,6 +42,7 @@
           %td= image_tag book.cover_url, class: "img-rounded", style: "width: 75px;height:125px;"
           %td= book.reputation
           %td= book.genre
+          %td= book.notes.present? ? link_to("Show", "#", rel: "popover", data: { :"original-title" => book.name, placement: "top", content: book.notes }) : ""
           %td= book.user.to_s
           - if book.added_by(@user)
             %td= link_to 'Edit', edit_book_path(book)
@@ -49,3 +51,7 @@
 
   %br
 = link_to 'Add Book', new_book_path
+:javascript
+  $("a[rel=popover]").popover().click(function(e) {
+    e.preventDefault()
+  })
