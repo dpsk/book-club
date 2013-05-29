@@ -19,30 +19,18 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe BooksController do
+  before { controller.stub(:authenticate_user!).and_return true }
+  before { controller.stub(:current_user).and_return user }
 
-  # This should return the minimal set of attributes required to create a valid
-  # Book. As you add validations to Book, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) { { "name" => "MyString" } }
-
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # BooksController. Be sure to keep this updated too.
+  let(:valid_attributes) { FactoryGirl.attributes_for(:book) }
   let(:valid_session) { {} }
+  let(:user) { FactoryGirl.create(:user) }
 
   describe "GET index" do
     it "assigns all books as @books" do
       book = Book.create! valid_attributes
       get :index, {}, valid_session
       assigns(:books).should eq([book])
-    end
-  end
-
-  describe "GET show" do
-    it "assigns the requested book as @book" do
-      book = Book.create! valid_attributes
-      get :show, {:id => book.to_param}, valid_session
-      assigns(:book).should eq(book)
     end
   end
 
@@ -77,7 +65,7 @@ describe BooksController do
 
       it "redirects to the created book" do
         post :create, {:book => valid_attributes}, valid_session
-        response.should redirect_to(Book.last)
+        response.should redirect_to(books_path)
       end
     end
 
@@ -119,7 +107,7 @@ describe BooksController do
       it "redirects to the book" do
         book = Book.create! valid_attributes
         put :update, {:id => book.to_param, :book => valid_attributes}, valid_session
-        response.should redirect_to(book)
+        response.should redirect_to(books_path)
       end
     end
 
@@ -130,14 +118,6 @@ describe BooksController do
         Book.any_instance.stub(:save).and_return(false)
         put :update, {:id => book.to_param, :book => { "name" => "invalid value" }}, valid_session
         assigns(:book).should eq(book)
-      end
-
-      it "re-renders the 'edit' template" do
-        book = Book.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Book.any_instance.stub(:save).and_return(false)
-        put :update, {:id => book.to_param, :book => { "name" => "invalid value" }}, valid_session
-        response.should render_template("edit")
       end
     end
   end
