@@ -28,15 +28,15 @@ class Book < ActiveRecord::Base
   end
 
   def added_by user
-    user_id == user.id
+    user_id == user.id if user
   end
 
   def voted_by user
-    votes.map(&:user_id).include? user.id
+    votes.map(&:user_id).include? user.id if user
   end
 
   def vote_by user
-    votes.where(user_id: user.id).first
+    votes.where(user_id: user.id).first if user
   end
 
 end

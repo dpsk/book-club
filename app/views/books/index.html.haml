@@ -42,7 +42,8 @@
           %td= book.reputation
           %td= book.genre
           %td= book.user.to_s
-          %td= link_to 'Edit', edit_book_path(book)
+          - if book.added_by(@user)
+            %td= link_to 'Edit', edit_book_path(book)
           - if book.added_by(@user)
             %td= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' }
 
